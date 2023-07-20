@@ -41,40 +41,35 @@ export default {
       );
     },
     clickElem(idList, idItem) {
-      this.Lists = this.Lists.map((el) =>
-        el.id === idList
-          ? {
-              ...el,
-              list: el.list.map((i) =>
-                i.id === idItem ? { ...i, count: i.count - 1 } : { ...i }
-              ),
+      this.Lists.forEach((element) => {
+        if (element.id === idList) {
+          element.list.forEach((el) => {
+            if (el.id === idItem) {
+              el.count -= 1;
             }
-          : { ...el }
-      );
+          });
+        }
+      });
     },
     changeItem(id) {
-      this.Lists = this.Lists.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              checked:
-                item.list.filter((i) => i.checked === true).length ===
-                item.list.length
-                  ? true
-                  : false,
-            }
-          : { ...item }
-      );
+      this.Lists.forEach((element) => {
+        if (element.id === id) {
+          element.checked =
+            element.list.filter((i) => i.checked === true).length ===
+            element.list.length
+              ? true
+              : false;
+        }
+      });
     },
     changeList(checked, id) {
-      this.Lists = this.Lists.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              list: item.list.map((el) => ({ ...el, checked: checked })),
-            }
-          : { ...item }
-      );
+      this.Lists.forEach((element) => {
+        if (element.id === id) {
+          element.list.forEach((el) => {
+            el.checked = checked;
+          });
+        }
+      });
     },
     createList() {
       for (let i = 0; i < 5; i++) {
